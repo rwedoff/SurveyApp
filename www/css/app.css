@@ -1,0 +1,67 @@
+body {
+    -webkit-touch-callout: none ;
+    -webkit-text-size-adjust: none ; -ms-text-size-adjust: none ;
+    -webkit-user-select: none ; -moz-user-select: none ; -ms-user-select: none ; user-select: none ;
+    -webkit-highlight: none ;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) ;
+    -webkit-tap-highlight-color: transparent ;      /* For some Androids */
+}
+
+
+html {
+    -ms-touch-action: pan-x ;
+}
+
+
+body {
+    -ms-touch-action: pan-y ;
+    -ms-content-zooming: none ;
+    color: white;
+}
+
+/* allow copy-paste */
+input, textarea  {
+    -webkit-user-select: text ; -moz-user-select: text ; -ms-user-select: text ; user-select: text ;
+}
+
+body {
+    /* margin: 0.5rem ; */
+    
+    
+}
+
+
+div#thanksSplash{
+    background-image: url(../images/background.jpg);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top:0;
+    left:0;
+    
+}
+
+#newTitle{
+ background-color: chartreuse;   
+}
+#footBut{
+    bottom: 0;
+    position: fixed;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    right: 0;
+    display: inline-block;
+}
+h1, h3, h2, h4{
+ color:white;   
+}
+p#wrongpass{
+    color:red;
+}
+label.narrow-control{
+    color: white;
+}
+.social-media-icons{
+ display: inline;
+margin: 1%;
+}

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-min.css">
+    <!--    <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-min.css">-->
+    <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+    <link rel="stylesheet" type="text/css" href="jquery-mobile-flat-ui-theme-master/generated/jquery.mobile.flatui.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <script src="intelxdk.js"></script>
+    <script src="cordova.js"></script>
+    <script src="xhr.js"></script>
+    <script src="xdk/init-dev.js"></script>
+    <script type="application/javascript" src="lib/jquery.min.js"></script>
+    <script type="application/javascript" src="jqm/jquery.mobile-min.js" data-ver="0"></script>
+    <script type="application/javascript" src="js/processSurvey.js"></script>
+    <script type="application/javascript" src="xdk/ad/af_subpage.js"></script>
+    <script type="application/javascript" src="app_framework/themeRelease.js"></script>
+    <script type="application/javascript" src="app_framework/pageChangeRepeater.js"></script>
+    <script type="application/javascript" src="js/app.js"></script>
+    <script type="application/javascript" src="js/index_user_scripts.js"></script>
+    <script type="application/javascript" src="popup/popup.min.js"></script>
+    <script type="application/javascript" src="xdk/appdesigner/js/rest-of-space.js"></script>
+
+    <script type="application/javascript" src="sidebar/js/hammer.js"></script>
+    <script type="application/javascript" src="sidebar/js/jquery.hammer.js"></script>
+    <script type="application/javascript" src="sidebar/js/swipe-hammer.js"></script>
+    <script type="application/javascript" src="sidebar/js/sidebar.js"></script>
+  </head>
+
+  <body>
+    <div class="upage ui-page-theme-b" id="mainpage" data-role="page">
+      <div class="upage-outer">
+        <div data-role="header" class="container-group inner-element uib_w_1" data-uib="jquery_mobile/header" data-ver="0" id="main_header">
+
+          <div class="widget-container wrapping-col single-centered">
+            <h2>Survey App</h2>
+          </div>
+          <div class="widget-container content-area horiz-area wrapping-col left">
+            <a class="widget uib_w_1134 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="togglemenu" data-icon="bars" data-iconpos="notext">Toggle Menu</a>
+          </div>
+          <div class="widget-container content-area horiz-area wrapping-col right">
+          </div>
+
+        </div>
+
+        <!--Home Page-->
+        <div id="homePage" class="upage-content vertical-col left ">
+          <h1>Welcome to CAB!</h1>
+
+          <footer data-position="fixed" id="footBut">
+            <div class="widget-container content-area horiz-area wrapping-col right"><a class="widget uib_w_1094 round" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="plus" data-iconpos="notext" id="newSurveyBut" href="#newSurvey">New Survey</a>
+            </div>
+          </footer>
+        </div>
+
+        <!--Settings Page -->
+        <div class="upage-content ac0 content-area vertical-col left hidden" id="page_71_63">
+          <div class="table-thing with-label widget uib_w_1087 d-margins" data-uib="jquery_mobile/input" data-ver="0">
+            <label class="narrow-control label-top-left" for="oldPass">Change Lock Password:</label>
+            <input class="wide-control" id="oldPass" placeholder="Old Password" type="text">
+          </div>
+          <div class="table-thing with-label widget uib_w_1088 d-margins" data-uib="jquery_mobile/input" data-ver="0">
+            <label class="narrow-control" for="newPass"></label>
+            <input class="wide-control" id="newPass" placeholder="New Password" type="text">
+          </div>
+          <div class="table-thing with-label widget uib_w_1090 d-margins" data-uib="jquery_mobile/input" data-ver="0">
+            <label class="narrow-control" for="repeatPass"></label>
+            <input class="wide-control" id="repeatPass" placeholder="Repeat New Password" type="text">
+          </div><a class="widget uib_w_1089 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="savePass">Save Changes</a>
+
+        </div>
+
+        <div class="inner-element uib_w_1133 uib_sidebar leftbar bar-bg thumb-bg bar-gutter swipe" data-uib="layout/left_sidebar" data-ver="1" data-anim="{'style':'push', 'v':200, 'side':'left', 'dur':200}">
+          <div class="sidebar-content content-area vertical-col" >
+
+            <a class="widget uib_w_1093 sideEL" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="homeBut" data-icon="home">Home</a><a class="widget uib_w_1095 sideEL" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="bars"
+            id="oldSurveyBut">Surveys</a><a class="widget uib_w_1095 sideEL" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="gear" id="settingsBut">Settings</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Old Survey Page-->
+      <div id="oldSurveyPage" class="upage-content vertical-col left hidden">
+        
+          <ul data-role="listview" id="oldSurveyList" data-filter="true" data-filter-placeholder="Search Survey"></ul>
+        
+      </div>
+
+    </div>
+
+    <!--New Survey Page -> RunSurvey -->
+    <div class="upage ui-page-theme-b" id="newSurvey" data-role="page">
+
+      <!-- Spash Screen -->
+      <div id="thanksSplash">
+        <h2>Thank You! Your response has been recorded</h2>
+        <h4>Please hand the Tablet back to the nearest CAB member</h4>
+        <img src="images/coverPhoto.jpg">
+        <h3>Follow CAB on your Favorite Social Media!</h3>
+        <br>
+        <br>
+        <div class="social-media-icons">
+          <div class="small-2 medium-2 columns social-media-icons">
+            <a href="https://www.facebook.com/uiowacab" target="_blank">
+              <img src="images/1434704593_facebook.png" alt="vine">
+            </a>
+          </div>
+
+          <div class="small-2 medium-2 columns social-media-icons">
+            <a href="https://twitter.com/uiowaCAB" target="_blank">
+              <img src="images/1434704649_twitter.png">
+            </a>
+          </div>
+          <div class="small-2 medium-2 columns social-media-icons">
+            <a href="http://instagram.com/uiowacab" target="_blank">
+              <img src="images/1434704638_instagram.png">
+            </a>
+          </div>
+          <div class="small-2 medium-2 columns social-media-icons">
+            <img src="images/1434704575_snapchat.png" onclick="alert('Follow CAB on snapchat at: uiowacab' );">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="upage-outer content-area vertical-col left" id="startScreen">
+
+        <div class="upage-content ac0 content-area vertical-col" id="page_79_6">
+
+          <div class="grid grid-pad urow uib_row_2 row-height-2" data-uib="layout/row" data-ver="0">
+
+            <div class="col uib_col_6 col-0" data-uib="layout/col" data-ver="0">
+              <div class="widget-container content-area vertical-col">
+
+                <a class="widget uib_w_1097 d-margins roundSmall2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="lock" data-mini="true" data-icon="lock" data-iconpos="notext">Locked</a><span class="uib_shim"></span>
+                <div id="enterPass">
+                  <input class="wide-control" id="lockpass" placeholder="Enter Password" type="password">
+                  <p id="wrongpass">Wrong Password</p>
+                  <a data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="subPass">Unlock</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="widget uib_w_1098 scale-image d-margins" data-uib="media/img" data-ver="0">
+            <center>
+              <h1 class="surveyTitle" id="title">CAB Survey</h1>
+            </center>
+            <figure class="figure-align">
+              <img src="images/cablogo.png" alt="CAB">
+            </figure>
+
+          </div>
+          <div data-role="controlgroup" class="uib-jqm-flex widget uib_w_1099 d-margins" data-uib="jquery_mobile/button_group" data-ver="0" data-type="horizontal" id="newTitle">
+            <input class="wide-control" id="titleIN" placeholder="Enter Title" type="text">
+            <p id="badTitle">Invalid Title
+              <br>
+            </p>
+            <a class="widget uib_w_1100" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="forbidden" id="cancel" data-iconpos="notext" href="">Cancel</a><a class="widget uib_w_1101" data-uib="jquery_mobile/button" data-ver="0"
+            data-role="button" id="saveTitle" data-icon="edit" data-iconpos="notext">Save</a>
+            <center></center>
+          </div>
+          <div class="uib-grid widget uib_w_1131 grid-text grid-height d-margins" data-uib="layout/grid" data-ver="0" id="strtBut">
+
+            <div class="uib-grid-row">
+              <div class="uib-grid-cell widget-container"></div>
+            </div>
+            <div class="uib-grid-row">
+              <div class="uib-grid-cell widget-container"><a class="widget uib_w_1102 d-margins wide-control" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="carat-d" data-iconpos="bottom" id="startSurv">Start Survey</a>
+              </div>
+            </div>
+            <div class="uib-grid-row">
+              <div class="uib-grid-cell widget-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-role="popup" class="outer-element uib_w_1096 padded-col uib-jqm-popup" data-uib="jquery_mobile/popup" data-ver="0" id="surveySettings">
+        <h3>Survey Settings</h3>
+        <a data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="settingsHome" href="">Home</a>
+        <!--<a data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="changeTitle">Edit Survey Title</a>-->
+        <a data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="delSurvey">Delete Survey</a>
+      </div>
+
+      <!-- RUN SURVEY PAGE-->
+
+      <div id="runSurvey" class="upage-content vertical-col left hidden">
+
+        <a class="widget uib_w_1130 d-margins roundSmall2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-mini="true" data-icon="back" data-iconpos="notext" id="rSurveyBack">Back</a>
+        <h3 class="surveyTitle" id="topOfSurvey"></h3>
+        <div class="table-thing with-label no_wrap widget uib_w_1106 d-margins" data-uib="jquery_mobile/radio_button_group" data-ver="0">
+
+          <label class="narrow-control label-top-left">If you are a University of Iowa student, what year are you?</label>
+
+          <fieldset data-role="controlgroup" class="widget-container wide-control uib-jqm-flex" data-child-name="jqm-radio-group-0">
+            <form id="year">
+              <div class="ui-radio widget uib_w_1107" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>First Year
+                  <input type="radio" name="jqm-radio-group-0" value="First Year">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1108" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Sophomore
+                  <input type="radio" name="jqm-radio-group-0" value="Sophomore">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1109" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Junior
+                  <input type="radio" name="jqm-radio-group-0" value="Junior">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1109" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Senior
+                  <input type="radio" name="jqm-radio-group-0" value="Senior">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1109" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Graduate
+                  <input type="radio" name="jqm-radio-group-0" value="Graduate">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1109" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Non-Strudent
+                  <input type="radio" name="jqm-radio-group-0" value="Non-Student">
+                </label>
+              </div>
+            </form>
+          </fieldset>
+
+        </div>
+
+        <div class="table-thing with-label no_wrap widget uib_w_1110 d-margins" data-uib="jquery_mobile/radio_button_group" data-ver="0">
+          <form id="How">
+            <label class="narrow-control label-top-left">How did you first find out about this event?</label>
+            <fieldset data-role="controlgroup" class="widget-container wide-control uib-jqm-flex" data-child-name="jqm-radio-group-1">
+              <div class="ui-radio widget uib_w_1111" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Poster
+                  <input type="radio" name="jqm-radio-group-1" value="Poster">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1112" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Hand-Out
+                  <input type="radio" name="jqm-radio-group-1" value="Hand-Out">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1113" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Friend
+                  <input type="radio" name="jqm-radio-group-1" value="Friend">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1113" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Facebook / Social Media
+                  <input type="radio" name="jqm-radio-group-1" value="Facebook / Value">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1113" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>CAB Website
+                  <input type="radio" name="jqm-radio-group-1" value="CAB Website">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1113" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Other
+                  <input type="radio" name="jqm-radio-group-1" value="Other">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1113" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>CAB Member
+                  <input type="radio" name="jqm-radio-group-1" value="CAB Member">
+                </label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="table-thing with-label no_wrap widget uib_w_1114 d-margins" data-uib="jquery_mobile/checkbox_group" data-ver="0">
+          <form id="else">
+            <label class="narrow-control label-top-left">If you were not attending this event, what would you be doing?</label>
+            <fieldset data-role="controlgroup" class="widget-container wide-control uib-jqm-flex">
+              <div class="ui-checkbox widget uib_w_1115" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Studying
+                  <input type="checkbox" value="Studying">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1116" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Drinking
+                  <input type="checkbox" value="Drinking">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1117" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Watching TV
+                  <input type="checkbox" value="Watching TV">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1117" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Sleeping
+                  <input type="checkbox" value="Sleeping">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1117" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Hanging with Friends
+                  <input type="checkbox" value="Hanging with Friends">
+                </label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="table-thing with-label no_wrap widget uib_w_1118 d-margins" data-uib="jquery_mobile/checkbox_group" data-ver="0">
+          <form id="eventType">
+            <label class="narrow-control label-top-left">What type of events would you like to hear more about in the future?</label>
+            <fieldset data-role="controlgroup" class="widget-container wide-control uib-jqm-flex">
+              <div class="ui-checkbox widget uib_w_1119" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>ALL
+                  <input type="checkbox" value="ALL">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1120" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>CAB Road Trips
+                  <input type="checkbox" value="CAB Road Trips">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1121" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>CAB Movies
+                  <input type="checkbox" value="CAB Movies">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1117" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Cultural Events
+                  <input type="checkbox" value="Cultural Events">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1117" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Performances (Dancers, Jugglers, etc.)
+                  <input type="checkbox" value="Performances">
+                </label>
+              </div>
+              <div class="ui-checkbox widget uib_w_1117" data-uib="jquery_mobile/checkbox" data-ver="0">
+                <label>Comedians
+                  <input type="checkbox" value="Comedians">
+                </label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="table-thing with-label no_wrap widget uib_w_1122 d-margins" data-uib="jquery_mobile/radio_button_group" data-ver="0">
+
+          <label class="narrow-control label-top-left">How likely is it that you would be drinking if you were not to have attended this event?</label>
+          <fieldset data-role="controlgroup" class="widget-container wide-control uib-jqm-flex" data-child-name="jqm-radio-group-2">
+            <form id="drinking">
+              <div class="ui-radio widget uib_w_1124" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Very Likely
+                  <input type="radio" name="jqm-radio-group-2" value="Very Likely">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1124" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Somewhat Likely
+                  <input type="radio" name="jqm-radio-group-2" value="Somewhat Likely">
+                </label>
+              </div>
+              <div class="ui-radio widget uib_w_1125" data-uib="jquery_mobile/radio_button" data-ver="0">
+                <label>Not Likely
+                  <input type="radio" name="jqm-radio-group-2" value="Not Likely">
+                </label>
+              </div>
+            </form>
+          </fieldset>
+
+        </div>
+        <div class="table-thing with-label widget uib_w_1126 d-margins" data-uib="jquery_mobile/textarea" data-ver="0" id="askEvent">
+          <form id="askEvent">
+            <label class="narrow-control label-top-left">Name an event that you would like to see on campus: (Optional)</label>
+            <input class="wide-control" placeholder="Laser Tag, Trip to Chicago, Movies, etc." rows="2" wrap="soft" type="text" id="event">
+          </form>
+          <form id="askEmail">
+            <label class="narrow-control label-top-left">Would you like to revieve CAB's biweekly Newsletter? Yes, Enter Email:</label>
+            <input class="wide-control" placeholder="first-last@uiowa.edu" rows="2" wrap="soft" type="text" id="email">
+          </form>
+
+          <a class="widget uib_w_1128 d-margins submitSurv" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="submit" href="#newSurvey">Submit</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+
+</html>
