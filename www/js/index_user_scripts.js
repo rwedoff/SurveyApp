@@ -7,13 +7,6 @@
  function register_event_handlers()
  {
     
-    
-     /* button  Button */
-    
-    
-        /* button  Button */
-    
-    
         /* button  Button */
     $(document).on("click", ".uib_w_1091", function(evt)
     {
@@ -102,6 +95,7 @@
         e.preventDefault();
     }
 });
+
     
     }
  document.addEventListener("app.Ready", register_event_handlers, false);

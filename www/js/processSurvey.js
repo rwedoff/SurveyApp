@@ -6,31 +6,33 @@ $(function () {
     
     //Get a list of the old surveys
     var readSurveyData = "",
-        defaultQuestions = "\"If you are a University of Iowa student: what year are you?\",\"How did you originally find out about this event?\",\"If you were not attending this event: what would you most likely be doing?\",\"What kind of events would you like to see in the future?\",\"If you were not attending this event: how likely would be doing something that involved drinking alcohol?\",\"Name an event that you would like to see on campus: (Optional)\",\"Would you like to revieve CAB's biweekly Newsletter? Yes: Enter Email\"",
-        surveyList = JSON.parse(localStorage.getItem("surveyList")) || [];
+        readSurveyUrl = "",
+        defaultQuestions = "\"If you are a University of Iowa student: what year are you?\",\"How did you originally find out about this event?\",\"If you were not attending this event: what would you most likely be doing?\",\"What kind of events would you like to see in the future?\",\"If you were not attending this event: how likely would be doing something that involved drinking alcohol?\",\"Name an event that you would like to see on campus: (Optional)\",\"Would you like to revieve CAB's biweekly Newsletter? Yes: Enter Email\"";
+        
             
     
-      
-   
- 
-    
     //Contructor for Survey Obj
-    function Survey(title, questions) {
+    function Survey(title, questions, numRes) {
         this.title = title;
         this.questions = questions;
+        this.numRes = numRes;
     }
     
     
     //Populate old survey list 
-    for (var i = 0; i<surveyList.length; i++) {
-                $("#oldSurveyList").prepend("<li><a href='#newSurvey'>" + surveyList[i].title + "</a></li>");                
+    //window.localStorage.clear;
+    for(var i in localStorage) {
+        var survey = JSON.parse(localStorage[i]);
+        if(survey.title !== undefined) {
+        $("#oldSurveyList").prepend("<li id='"+survey.title+"'><a href='#newSurvey' id='hrefOnly'>" + survey.title + "</a><span class='ui-li-count'>" + survey.numRes + "</span></li>");
         $('#oldSurveyList').listview("refresh");
+        }
     }
    
     
     //Click on li in old survey list, goes to new Survey Page on Href=#newSurvvey
     $('li').on('click', function () {
-        $(".surveyTitle").text($(this).text());
+        $(".surveyTitle").text($(this).attr('id'));
     });
     
     
@@ -46,11 +48,21 @@ $(function () {
         
         $(".surveyTitle").text(datetime);
         var $surveyTitle = $("#title").text(),
-            surv = new Survey($surveyTitle, defaultQuestions); //Creates survey object
+            surv = new Survey($surveyTitle, defaultQuestions, 0); //Creates survey object
+        var titleList = [];
+        for(var i in localStorage) {
+            var survey = JSON.parse(localStorage[i]);
+            if(survey.title !== undefined) {
+                titleList.push(survey.title);
+            }
+        }
         //Save the new Title
         $('#saveTitle').on('click', function () {
             $surveyTitle  = $('#titleIN').val() || datetime;
-            
+            if(titleList.indexOf($surveyTitle) > -1 ){
+                $("#badTitle").show();
+            }
+            else {
             $('#strtBut').show();
             //Sets the title in the UI
             $('#newTitle').hide();
@@ -58,15 +70,12 @@ $(function () {
             //Creates new survey
             surv.title = $surveyTitle;
             $(".surveyTitle").text(surv.title);
-            
-        //Add survey to the list of surveys
-            surveyList.push(surv);
-        //Update the survey list in local storage
-            window.localStorage.setItem("surveyList", JSON.stringify(surveyList));
-        
-        //Update the survey list UI in OLD SURVEY PAGE
-            $("#oldSurveyList").append("<li><a href='#newSurvey'>" + surv.title + "</a></li>");
+            //Save survey meta in local storage
+            window.localStorage.setItem(surv.title, JSON.stringify(surv));
+            //Update the survey list UI in OLD SURVEY PAGE
+            $("#oldSurveyList").append("<li id='"+surv.title+"'><a href='#newSurvey' id='hrefOnly'>" + surv.title + "</a><span class='ui-li-count'>" + surv.numRes + "</span></li>");
             $('#oldSurveyList').listview("refresh");
+            }
         });
     });
     
@@ -103,9 +112,6 @@ $(function () {
         $('#email').val('');
                 
     }
-    
-
-    
     
     function processSurvey() {
         var $year = $('input[type=radio]:checked', '#year').val() || " ",
@@ -148,11 +154,10 @@ $(function () {
    
     function readFile(title) {
       // Wait for device API libraries to load
-        var result = "";
+        
         document.addEventListener("deviceready", onDeviceReady, false);
 
     // device APIs are available
-    //
         function onDeviceReady() {
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
         }
@@ -170,15 +175,16 @@ $(function () {
             readAsText(file);
         
         }
-
+        
         function readDataUrl(file) {
-            var reader = new FileReader();
-            reader.onloadend = function(evt) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
             console.log("Read as data URL");
-            //console.log(evt.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
+            console.log(evt.target.result);
+            readSurveyUrl = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
 
         function readAsText(file) {
             var reader = new FileReader();
@@ -196,7 +202,6 @@ $(function () {
             console.log("Reader Error: " + evt.target.error.code);
         }
         
-       return result;
     }
     
     
@@ -223,13 +228,13 @@ $(function () {
         function gotFileWriter(writer) {
             writer.onwriteend = function(evt) {
             console.log("contents of file now " + data);
-            //writer.truncate(11);
+            writer.truncate(0);
                 writer.onwriteend = function(evt) {
-                    console.log("contents of file now " + data);
-                    writer.seek(4);
+              //      console.log("contents of file now " + data);
+              //     writer.seek(4);
                     writer.write(data);
                     writer.onwriteend = function(evt){
-                    console.log("contents of file now " + data);
+                //    console.log("contents of file now " + data);
                     };
                 };
             };
@@ -241,38 +246,111 @@ $(function () {
         }
         
     }
+     
     
+   //Submit Survey, calls Cordova Read and Write
     
-    //Submit Survey, calls Cordova Read and Write
+     $(".submitSurv").on("click", function () {
     
-    
-    $(".submitSurv").on("click", function () {
-    
-        var title = $("#title").text();
-        debugger;
-        for( var i = 0; i < surveyList.length; i++) {
-        
-            if( surveyList[i].title === title  ) {
-                    alert(surveyList[i].questions);
-                readSurveyData = surveyList[i].questions;
-            }
-        }
-          
-       readFile(title);
-       
-        
+        var thisSurveyTitle = $("#title").text(),
+            thisSurvey =  JSON.parse(window.localStorage.getItem(thisSurveyTitle)),
+            thisSurveyQuestions = thisSurvey.questions,
+            numRes = thisSurvey.numRes;
+         
+            readFile(thisSurvey.title); 
+         
         var processedData = processSurvey();
         if (processedData !== '" "," ","",""," "," "," "') { //Do not allow empty survey
-            readSurveyData += "\n" + processedData;
+            console.log(readSurveyData.indexOf(thisSurveyQuestions));
+            if (readSurveyData.indexOf(thisSurveyQuestions) !== -1) {
+                readSurveyData += "\n" + processedData;
+            } else {
+                readSurveyData += thisSurveyQuestions + "\n" + processedData;
+            }
+            
         }
-    
-        writeFile(title, readSurveyData);
+        
+        writeFile(thisSurvey.title, readSurveyData);
         survSplash();
+         thisSurvey.numRes += (1);
+         window.localStorage.setItem(thisSurvey.title, JSON.stringify(thisSurvey));
+         $('#oldSurveyList').listview("refresh");
         resetForms();
         activate_subpage("#page_79_6");
      
     });
+    //Delete survey, still on file system, but not in app.
+   $('#delBut').on('click', function () {
+       
+       var yesDelete = confirm("Are you sure you want to delete this survey? (The CSV file will still be in the file system)");
+       if(yesDelete == true ) {
+         var thisSurveyTitle = $("#title").text();
+        window.localStorage.removeItem(thisSurveyTitle);
+        var jqTitle = "#" + thisSurveyTitle;
+        $(jqTitle).remove();
+        $('#oldSurveyList').listview("refresh");
+     
+       
+       }
+       
+    });
     
+    
+    //UI Stuff / Password handling   
+        $("#wrongpass").hide();
+        $("#enterPass").hide();
+        var password = "entertainment";
+        password = localStorage.getItem("password") || "entertainment";
+    
+    
+    $("#lock").on("click", function() {
+           $("#enterPass").toggle();
+    });
+    
+    $("#subPass").on('click',function(){
+        var pass = $("#lockpass").val();
+        if (pass === password) {
+            $("#wrongpass").hide();
+            $("#enterPass").hide();
+             $("#surveySettings2").popup('open');           
+            $("#lockpass").val('');
+        }
+        else{
+            $("#lockpass").val('');
+            $("#wrongpass").show();
+        }
+    });
+    
+    
+   
+    
+    //Password Change
+     $("#savePass").on('click',function() {
+         //alert(password);
+       var oldPass = $("#oldPass").val();
+        var newPass = $("#newPass").val();
+         var repPass = $("#repeatPass").val();
+         if(oldPass == password){
+             if(newPass == ""){
+              alert("Password can't be empty");
+             }
+            if(newPass == repPass){
+                password = newPass;
+                // Store password
+                localStorage.setItem("password", newPass);
+                alert("Password has been changed");
+            }
+            else{
+             alert("New Password does not match");   
+            }
+         }
+         else{
+            alert("Wrong Old Password");   
+         }
+    });
+
+    
+ 
    
         
 });

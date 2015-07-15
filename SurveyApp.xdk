@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "appDesigner",
       "projectGuid": "8c694f0b-59fe-4d89-b960-e41ac92bfa1d",
-      "lastModifiedDate": 1434771927247,
+      "lastModifiedDate": 1436234486836,
       "creationDate": 1431911363787
     },
     "XDK-app-designer": "true",
@@ -80,7 +80,7 @@
         "excludedLibraries_": "",
         "iosProvs_": [],
         "cordovaCLIVersion_": "4.1.2",
-        "crosswalkVersion_": "11",
+        "crosswalkVersion_": "shared_beta",
         "appVersion_": "0.0.1",
         "appAuthor_": "Ryan Wedoff",
         "appDescription_": "A data collection tool used for the University of Iowa Campus Activites Board.",
@@ -95,7 +95,7 @@
           "android-targetSdkVersion": "19",
           "android-installLocation": "auto"
         },
-        "isActive_": true,
+        "isActive_": false,
         "appName_": "SurveyApp",
         "appID_": "xdk.intel.blank.ad.template",
         "appAccess_": [
