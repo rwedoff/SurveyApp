@@ -11,10 +11,11 @@ $(function () {
             
     
     //Contructor for Survey Obj
-    function Survey(title, questions, numRes) {
+    function Survey(title, questions, numRes, response) {
         this.title = title;
         this.questions = questions;
         this.numRes = numRes;
+        this.response = response;
     }
     
     
@@ -45,7 +46,7 @@ $(function () {
         var d = new Date(),
             datetime = "CAB Survey " + (d.getMonth() + 1)  + " " + d.getFullYear() + " " + d.getHours() + " " + d.getMinutes() + " " + d.getSeconds(),
             $surveyTitle = $("#title").text(),
-            surv = new Survey($surveyTitle, defaultQuestions, 0), //Creates survey object
+            surv = new Survey($surveyTitle, defaultQuestions, 0, ''), //Creates survey object
             titleList = [];
         $(".surveyTitle").text(datetime);
        for(var i in localStorage) {
@@ -158,21 +159,23 @@ $(function () {
         var thisSurveyTitle = $("#title").text(),
             thisSurvey =  JSON.parse(window.localStorage.getItem(thisSurveyTitle)),
             thisSurveyQuestions = thisSurvey.questions,
-            numRes = thisSurvey.numRes;
-         
-        readFile(thisSurvey.title);
+            numRes = thisSurvey.numRes,
+            surveyResponse = thisSurvey.response;
+        
         var processedData = processSurvey();
         if (processedData !== '" "," ","",""," "," "," "') { //Do not allow empty survey
             window.console.log(readSurveyData.indexOf(thisSurveyQuestions));
-            if (readSurveyData.indexOf(thisSurveyQuestions) !== -1) {
-                readSurveyData += "\n" + processedData;
+            if (surveyResponse.indexOf(thisSurveyQuestions) !== -1) {
+                surveyResponse += "\n" + processedData;
             } else {
-                readSurveyData += thisSurveyQuestions + "\n" + processedData;
+                surveyResponse += thisSurveyQuestions + "\n" + processedData;
             }
             
         }
         
-        writeFile(thisSurvey.title, readSurveyData);
+        writeFile(thisSurvey.title, surveyResponse);
+        thisSurvey.response = surveyResponse;
+        console.log(thisSurvey.response);
         survSplash();
         thisSurvey.numRes += (1);
         window.localStorage.setItem(thisSurvey.title, JSON.stringify(thisSurvey));
@@ -241,7 +244,7 @@ $(function () {
     });
 
        
-    function readFile(title) {
+   /* function readFile(title) {
          // Wait for device API libraries to load
         
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -289,7 +292,7 @@ $(function () {
         }
             
     }
-    
+    */
     
     
     function writeFile(title, data) {
