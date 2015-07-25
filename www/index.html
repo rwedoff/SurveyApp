@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 
   <head>
     <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-min.css">
+    <!--    <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-min.css">-->
     <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
     <link rel="stylesheet" type="text/css" href="jquery-mobile-flat-ui-theme-master/generated/jquery.mobile.flatui.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
@@ -21,69 +23,91 @@
     <script type="application/javascript" src="js/index_user_scripts.js"></script>
     <script type="application/javascript" src="popup/popup.min.js"></script>
     <script type="application/javascript" src="xdk/appdesigner/js/rest-of-space.js"></script>
+
     <script type="application/javascript" src="sidebar/js/hammer.js"></script>
     <script type="application/javascript" src="sidebar/js/jquery.hammer.js"></script>
     <script type="application/javascript" src="sidebar/js/swipe-hammer.js"></script>
     <script type="application/javascript" src="sidebar/js/sidebar.js"></script>
     <script type="application/javascript" src="xdk/ad/af_subpage.js"></script>
-      
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
   </head>
 
   <body>
     <div class="upage ui-page-theme-b" id="mainpage" data-role="page">
       <div class="upage-outer">
-        <div data-role="header" class="container-group inner-element uib_w_1" data-uib="jquery_mobile/header" data-ver="0" id="main_header">
-
+        <div data-role="header" class="nav-wrapper z-depth-4"  data-ver="0" id="main_header">
           <div class="widget-container wrapping-col single-centered">
             <h2>CAB Survey</h2>
           </div>
           <div class="widget-container content-area horiz-area wrapping-col left">
-            <a class="widget uib_w_1134 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="togglemenu" data-icon="bars" data-iconpos="notext">Toggle Menu</a>
+            <a class="widget uib_w_1134 d-margins button-collapse" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="togglemenu" data-iconpos="notext"><i class="material-icons">menu</i></a>
+              
           </div>
-          <div class="widget-container content-area horiz-area wrapping-col right">
-          </div>
+          
 
         </div>
 
         <!--Home Page-->
         <div id="homePage" class="upage-content vertical-col left ">
             <p class="c9 title"><a name="h.z8ijpfmthonq"></a><span>How to Use CAB Tablets</span></p><p class="c10"><span></span></p><ol class="c0 lst-kix_kkq46tr0dz9-0 start" start="1"><li class="c8"><span class="c6">Unlock the box</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-1 start" start="1"><li class="c4"><span>There are 3 tablets, one in the Iowa Theatre Office, one in the IL Room Projector Room, and in the CAB Office.</span></li><li class="c4"><span>Obtain the keys for each room, for <br>CAB Roaming (In the CAB Office): 48 <br>CAB Iowa Theatre: 55<br>CAB IL Room: &nbsp;52</span></li></ol><p class="c5"><span></span></p><ol class="c0 lst-kix_kkq46tr0dz9-1" start="3"><li class="c4"><span>Use the Lock Box key on each keyring to unlock the box.</span></li><li class="c4"><span>Unplug and take the tablet out of the box.</span></li></ol><p class="c5"><span></span></p><ol class="c0 lst-kix_kkq46tr0dz9-0" start="2"><li class="c8"><span class="c6">Unlock the Tablet</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-1 start" start="1"><li class="c4"><span>Use the side button to wake the tablet.</span></li><li class="c4"><span>ONCE YOU UNLOCK THE TABLET YOU MUST CHECK IT OUT USING THE GOOGLE FORM.</span></li><li class="c4"><span>**If leaving the IMU, Checkout the tablet in the IMU where there is internet!</span></li><li class="c4"><span>Leave the volume off. Every time a survey is filled out, all three devices will ring if sound is not turned off.</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-0" start="3"><li class="c8"><span class="c6">Homescreen:</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-1 start" start="1"><li class="c4"><span>On the homescreen you will find:</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-2 start" start="1"><li class="c1"><span class="c3">Tablet Checkout Survey</span><span>: &nbsp;Information below.</span></li><li class="c1"><span class="c3">Loop Survey App</span><span>: &nbsp;Information below.</span></li><li class="c1"><span class="c3">Youtube</span><span>: &nbsp;Use this for music and advertising purposes</span></li><li class="c1"><span class="c3">Camera</span><span>: &nbsp;Feel free to take pictures and post them in the story. &nbsp;Please save every picture and video to device, photos are automatically backed up to Google Photos Server.</span></li><li class="c1"><span class="c3">SnapChat &amp; Instagram</span><span>: &nbsp;Feel free to take pictures and post them in the story. &nbsp;Please save every picture and video to device!</span></li><li class="c1"><span>QR Codes, scan the QR code with Snapchat (to add CAB to Snapchat) &nbsp;or another QR code reader, like Google Goggles (to add CAB on Facebook)</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-0" start="4"><li class="c8"><span class="c6">How to Checkout a Tablet</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-1 start" start="1"><li class="c4"><span>Click on the Tablet Checkout Form on the home screen</span></li><li class="c4"><span>Fill out survey with name, date, time, location, and reason for using the tablet, all questions are required!</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-2 start" start="1"><li class="c1"><span>This form is a contract leaving the exec member responsible for anything that happens to the device while it is in use. &nbsp;At any time the device can be locked, located, or rung by a device administrator.</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-0" start="5"><li class="c8"><span class="c6">How to administer surveys</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-1 start" start="1"><li class="c4"><span>Open the CAB Survey App.</span></li><li class="c4"><span>Internet is not required!</span></li><li class="c4"><span>Tap on the plus sign to create a new survey or open the menu to see already made surveys.</span></li><li class="c4"><span>Tap on the Survey for the Event you would like to collect data for. Surveys will be created for every event and movie.</span></li><li class="c4"><span>The survey is automatically locked. &nbsp;The password to unlock the survey is &ldquo;entertainment&rdquo;.</span></li><li class="c4"><span>Give survey to people. &nbsp;If the tablet is vertical, the whole survey is there, if horizontal, swipe right to get to the next question.</span></li><li class="c4"><span>Press &ldquo;submit&rdquo; after each survey.</span></li></ol><p class="c5"><span></span></p><ol class="c0 lst-kix_kkq46tr0dz9-0" start="6"><li class="c8"><span class="c6">Putting Tablet Away:</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-1 start" start="1"><li class="c4"><span>Close all apps on tablet, leave it turned on and make sure Wifi and GPS are still on. &nbsp;To do this, press the button next to the home button and press &ldquo;Close all apps&rdquo;</span></li><li class="c4"><span>Clear all the notifications in the notification bar. &nbsp;To access the notification bar, swipe from the top of the screen down. &nbsp;Press the blue X to clear all notifications.</span></li><li class="c4"><span>Place the tablet in the lockbox.</span></li><li class="c4"><span>Plug the tablet into the charging cord in the lockbox.</span></li><li class="c4"><span>Lock the box</span></li><li class="c4"><span>Make sure the lockbox is attached to something else.</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-0" start="7"><li class="c8"><span class="c6">General Rules When Using Tablets</span></li></ol><ol class="c0 lst-kix_kkq46tr0dz9-1 start" start="1"><li class="c4"><span>The tablet should not be used for any reason except for official CAB Events or Marketing reasons. &nbsp;Messing around with them in the CAB Office is not permitted.</span></li><li class="c4"><span>When not in use, the CAB Tablets should be locked and stored in their proper locations per the checkout form.</span></li><li class="c4"><span>The person who checks out the tablet is responsible for anything that happens to it.</span></li><li class="c4"><span>Refrain from downloading apps and unnecessary programs on the tablets.</span></li><li class="c4"><span>Do not take the tablet out of the case.</span></li><li class="c4"><span>When held by someone else, keep an eye on where the tablet is. Tablets can be located with Android Device Manager. &nbsp;Call Ryan immediately if lost.</span></li><li class="c4"><span>If any questions, concerns, or troubleshooting call Ryan Wedoff:</span></li></ol><p class="c2"><span>&nbsp;(847) 452-2847</span></p>
-          <footer data-position="fixed" id="footBut">
-            <div class="widget-container content-area horiz-area wrapping-col right"><a class="widget uib_w_1094 round" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="plus" data-iconpos="notext" id="newSurveyBut" href="#newSurvey">New Survey</a>
+        <footer data-position="fixed" id="footBut">
+            <div class="fixed-action-btn" style="bottom: 45px; ">
+                <a class="btn-floating btn-large red">
+                    <i class="large material-icons red accent-2">mode_edit</i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating red" id="newSurveyBut" href="#newSurvey"><i class="material-icons">insert_chart</i></a></li>
+                    <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                    <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                </ul>
             </div>
           </footer>
-        </div>
+       
+    </div>
 
         <!--Settings Page -->
-        <div class="upage-content ac0 content-area vertical-col left hidden" id="page_71_63">
-          <div class="table-thing with-label widget uib_w_1087 d-margins" data-uib="jquery_mobile/input" data-ver="0">
-            <label class="narrow-control label-top-left" for="oldPass">Change Lock Password:</label>
+        <div class="upage-content hidden" id="page_71_63">
+          <div>
+              
+            <label class=" label-top-left" for="oldPass">Change Lock Password:</label>
             <input class="wide-control" id="oldPass" placeholder="Old Password" type="text">
           </div>
-          <div class="table-thing with-label widget uib_w_1088 d-margins" data-uib="jquery_mobile/input" data-ver="0">
+          <div class="" data-uib="jquery_mobile/input" data-ver="0">
             <label class="narrow-control" for="newPass"></label>
             <input class="wide-control" id="newPass" placeholder="New Password" type="text">
           </div>
-          <div class="table-thing with-label widget uib_w_1090 d-margins" data-uib="jquery_mobile/input" data-ver="0">
+          <div class="" data-uib="jquery_mobile/input" data-ver="0">
             <label class="narrow-control" for="repeatPass"></label>
             <input class="wide-control" id="repeatPass" placeholder="Repeat New Password" type="text">
-          </div><a class="widget uib_w_1089 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="savePass">Save Changes</a>
+          </div>
+            <a class="widget uib_w_1089 d-margins waves-effect waves-light btn red accent-2 right" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="savePass"><i class="material-icons right">done_all</i>Save Changes</a>
+            <a class="widget uib_w_1089 d-margins waves-effect waves-light btn red accent-2 right" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="homeBut"><i class="material-icons right">replay</i>Cancel</a>
 
         </div>
 
         <div class="inner-element uib_w_1133 uib_sidebar leftbar bar-bg thumb-bg bar-gutter swipe" data-uib="layout/left_sidebar" data-ver="1" data-anim="{'style':'push', 'v':200, 'side':'left', 'dur':200}">
           <div class="sidebar-content content-area vertical-col">
-
-            <a class="widget uib_w_1093 sideEL" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="homeBut" data-icon="home">Home</a><a class="widget uib_w_1095 sideEL" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="bars"
-            id="oldSurveyBut">Surveys</a><a class="widget uib_w_1095 sideEL" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="gear" id="settingsBut">Settings</a>
+            
+            <a class="widget uib_w_1093 sideEL waves-effect waves-light btn-large  red accent-2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="homeBut" data-icon="home">Home</a>
+              <a class="widget uib_w_1095 sideEL waves-effect waves-light btn-large  red accent-2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="bars" id="oldSurveyBut">Surveys</a>
+              <a class="widget uib_w_1095 sideEL waves-effect waves-light btn-large  red accent-2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="gear" id="settingsBut">Settings</a>
           </div>
         </div>
       </div>
 
       <!-- Old Survey Page-->
-      <div id="oldSurveyPage" class="upage-content vertical-col left hidden">
+      <div id="oldSurveyPage" class="upage-content hidden">
 
-        <ul data-role="listview" id="oldSurveyList" data-filter="true" data-filter-placeholder="Search Survey"></ul>
+        <ul data-role="listview" id="oldSurveyList" data-filter="true" data-filter-placeholder="Search Survey">
+          
+          <!--Old Surveys Go Here!-->
+          </ul>
 
       </div>
 
@@ -94,11 +118,15 @@
 
       <!-- Spash Screen -->
       <div id="thanksSplash">
-        <h2>Thank You! Your response has been recorded</h2>
-        <h4>Please hand the Tablet back to the nearest CAB member</h4>
+          <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <h3>Thank You! Your response has been recorded</h3>
+        <h5>Please hand the Tablet back to the nearest CAB member</h5>
         <img src="images/coverPhoto.jpg">
-        <h3>Follow CAB on your Favorite Social Media!</h3>
+        <h4>Follow CAB on your Favorite Social Media!</h4>
         <br>
+          
         <br>
         <div class="social-media-icons">
           <div class="small-2 medium-2 columns social-media-icons">
@@ -124,7 +152,7 @@
 
       </div>
 
-      <div class="upage-outer content-area vertical-col left" id="startScreen">
+      <div class="upage-outer content-area" id="startScreen">
 
         <div class="upage-content ac0 content-area vertical-col" id="page_79_6">
 
@@ -133,11 +161,11 @@
             <div class="col uib_col_6 col-0" data-uib="layout/col" data-ver="0">
               <div class="widget-container content-area vertical-col">
 
-                <a class="widget uib_w_1097 d-margins roundSmall2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="lock" data-mini="true" data-icon="lock" data-iconpos="notext">Locked</a><span class="uib_shim"></span>
+                <a class="btn-floating btn waves-effect waves-light red accent-2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="lock" data-mini="true"  data-iconpos="notext"><i class="material-icons">lock_outline</i></a>
                 <div id="enterPass">
                   <input class="wide-control" id="lockpass" placeholder="Enter Password" type="password">
                   <p id="wrongpass">Wrong Password</p>
-                  <a data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="subPass">Unlock</a>
+                  <a class="btn waves-effect waves-light red accent-2 wide-control" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="subPass">Unlock</a>
                 </div>
               </div>
             </div>
@@ -150,46 +178,51 @@
             <figure class="figure-align">
               <img src="images/cablogo.png" alt="CAB">
             </figure>
-
           </div>
-          <div data-role="controlgroup" class="uib-jqm-flex widget uib_w_1099 d-margins" data-uib="jquery_mobile/button_group" data-ver="0" data-type="horizontal" id="newTitle">
+          <div id="newTitle">
             <input class="wide-control" id="titleIN" placeholder="Enter Title" type="text">
-            <p id="badTitle">Invalid Title
-              <br>
-            </p>
-            <a class="widget uib_w_1100" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="forbidden" id="cancel" data-iconpos="notext" href="">Cancel</a><a class="widget uib_w_1101" data-uib="jquery_mobile/button" data-ver="0"
-            data-role="button" id="saveTitle" data-icon="edit" data-iconpos="notext">Save</a>
-            <center></center>
+            <p id="badTitle">Invalid Title<br></p>
+            <a class="aves-effect waves-light btn-large red accent-2 right"  id="saveTitle" ><i class="material-icons right">done_all</i>Save</a>
+            <a class="aves-effect waves-light btn-large red accent-2 right" id="cancel" href=""><i class="material-icons right">replay</i>Cancel</a>
           </div>
           <div class="uib-grid widget uib_w_1131 grid-text grid-height d-margins" data-uib="layout/grid" data-ver="0" id="strtBut">
 
+                        <div class="uib-grid-row">
+                        <div class="uib-grid-cell widget-container"></div>
+                        </div>
             <div class="uib-grid-row">
-              <div class="uib-grid-cell widget-container"></div>
-            </div>
-            <div class="uib-grid-row">
-              <div class="uib-grid-cell widget-container"><a class="widget uib_w_1102 d-margins wide-control" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="carat-d" data-iconpos="bottom" id="startSurv">Start Survey</a>
+              <div class="uib-grid-cell widget-container">
+                <button class="btn-large waves-effect waves-light red accent-2" id="startSurv">Start Survey
+                <i class="material-icons">send</i>
+                </button>
               </div>
-            </div>
-            <div class="uib-grid-row">
-              <div class="uib-grid-cell widget-container"></div>
-            </div>
-          </div>
+                        </div>
+                        <div class="uib-grid-row">
+                        <div class="uib-grid-cell widget-container"></div>
+                        </div>
+              </div>
         </div>
       </div>
 
       <!-- RUN SURVEY PAGE-->
 
-      <div id="runSurvey" class="upage-content vertical-col left hidden">
+      <div id="runSurvey" class="upage-content vertical-col hidden">
 
-        <a class="widget uib_w_1130 d-margins roundSmall2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-mini="true" data-icon="back" data-iconpos="notext" id="rSurveyBack">Back</a>
+        <a class="btn-floating btn waves-effect waves-light red accent-2" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-mini="true" data-iconpos="notext" id="rSurveyBack"><i class="material-icons">not_interested</i></a>
+          
         <h3 class="surveyTitle" id="topOfSurvey"></h3>
+          
+          
+          
+        <div id="runningQuestions" class="vertical-col">
+          
         <div class="table-thing with-label no_wrap widget uib_w_1106 d-margins" data-uib="jquery_mobile/radio_button_group" data-ver="0">
 
           <label class="narrow-control label-top-left">If you are a University of Iowa student, what year are you?</label>
 
           <fieldset data-role="controlgroup" class="widget-container wide-control uib-jqm-flex" data-child-name="jqm-radio-group-0">
-            <form id="year">
-              <div class="ui-radio widget uib_w_1107" data-uib="jquery_mobile/radio_button" data-ver="0">
+            <form id="year">   
+              <div data-uib="jquery_mobile/radio_button" data-ver="0">
                 <label>First Year
                   <input type="radio" name="jqm-radio-group-0" value="First Year">
                 </label>
@@ -368,24 +401,28 @@
             <label class="narrow-control label-top-left">Would you like to revieve CAB's biweekly Newsletter? Yes, Enter Email:</label>
             <input class="wide-control" placeholder="first-last@uiowa.edu" rows="2" wrap="soft" type="text" id="email">
           </form>
-
-          <a class="widget uib_w_1128 d-margins submitSurv" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="submit" href="#newSurvey">Submit</a>
+            </div>
+            
+          <a class="widget uib_w_1128 d-margins submitSurv btn-large waves-effect waves-light red accent-2 right" data-uib="jquery_mobile/button" data-ver="0" data-role="button" id="submit" href="#newSurvey">  <i class="material-icons right">send</i>Submit</a>
         </div>
 
       </div>
 
-      <div data-role="popup" class="outer-element uib_w_1135 padded-col uib-jqm-popup" data-uib="jquery_mobile/popup" data-ver="0" id="surveySettings2">
-        <div style="background-color: #DD7064;">
-          <center> <h2>Survey Settings</h2></center>
-        </div><a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
-        <div class="col uib_col_7 single-col" data-uib="layout/col" data-ver="0">
-          <div class="widget-container content-area vertical-col">
-
-            <a class="widget uib_w_1136 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="home" id="settingsHome" href="index.html">Home</a><a class="widget uib_w_1137 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button"
-            data-icon="delete" id="delBut" href="index.html">Delete Survey</a><span class="uib_shim"></span>
-              
+      <div><div data-role="popup" class="row uib-jqm-popup" data-uib="jquery_mobile/popup" data-ver="0" id="surveySettings2">
+        <div class="col s12">
+          <div class="card red accent-2">
+              <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+            <div class="card-content white-text">
+              <span class="card-title">Survey Settings</span>
+              <p>Survey Settings is for CAB executive members only.  If you are not an executive member please notify an excutive member  immediately.</p>
+            </div>
+            <div class="card-action">
+                <a id="settingsHome" href="index.html">Home</a>
+                <a id="delBut" href="index.html">Delete Survey</a>
+            </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
 

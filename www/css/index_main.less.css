@@ -992,7 +992,7 @@ label.narrow-control:empty + .wide-control {
 }
 @media all {
   .bar-bg {
-    background-color: #7d5b7c;
+    background-color: #5e35b1;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;

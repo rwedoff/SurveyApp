@@ -24,7 +24,7 @@ $(function () {
     for(var i in localStorage) {
         var survey = JSON.parse(localStorage[i]);
         if(survey.title !== undefined) {
-        $("#oldSurveyList").prepend("<li id='"+survey.title+"'><a href='#newSurvey' id='hrefOnly'>" + survey.title + "</a><span class='ui-li-count'>" + survey.numRes + "</span></li>");
+        $("#oldSurveyList").prepend("<li id='"+survey.title+"'><a href='#newSurvey' id='hrefOnly'>" + survey.title + "<div class='ui-li-count'>" + survey.numRes + "</div></a></li>");
         $('#oldSurveyList').listview("refresh");
         }
     }
@@ -71,7 +71,7 @@ $(function () {
                 //Save survey meta in local storage
                 window.localStorage.setItem(surv.title, JSON.stringify(surv));
                 //Update the survey list UI in OLD SURVEY PAGE
-                $("#oldSurveyList").append("<li id='" + surv.title + "'><a href='#newSurvey' id='hrefOnly'>" + surv.title + "</a><span class='ui-li-count'>" + surv.numRes + "</span></li>");
+                $("#oldSurveyList").append("<li id='" + surv.title + "'><a href='#newSurvey' id='hrefOnly'>" + surv.title + "<div class='ui-li-count'>" + surv.numRes + "</div></a></li>");
                 $('#oldSurveyList').listview("refresh");
             }
         });
