@@ -4,9 +4,7 @@ $(function () {
     $('#badTitle').hide();
     
     //Get a list of the old surveys
-    var readSurveyData = "",
-        readSurveyUrl = "",
-        defaultQuestions = "\"If you are a University of Iowa student: what year are you?\",\"How did you originally find out about this event?\",\"If you were not attending this event: what would you most likely be doing?\",\"What kind of events would you like to see in the future?\",\"If you were not attending this event: how likely would be doing something that involved drinking alcohol?\",\"Name an event that you would like to see on campus: (Optional)\",\"Would you like to revieve CAB's biweekly Newsletter? Yes: Enter Email\"",
+    var defaultQuestions = "\"If you are a University of Iowa student: what year are you?\",\"How did you originally find out about this event?\",\"If you were not attending this event: what would you most likely be doing?\",\"What kind of events would you like to see in the future?\",\"If you were not attending this event: how likely would be doing something that involved drinking alcohol?\",\"Name an event that you would like to see on campus: (Optional)\",\"Would you like to revieve CAB's biweekly Newsletter? Yes: Enter Email\"",
         defaultHTML = '<div class="table-thing with-label no_wrap widget uib_w_1106 d-margins" data-uib="jquery_mobile/radio_button_group" data-ver="0"> ' +
         '<label class="narrow-control label-top-left">If you are a University of Iowa student, what year are you?</label> ' +
 
@@ -191,7 +189,12 @@ $(function () {
        '     <label class="narrow-control label-top-left">Would you like to revieve CAB\'s biweekly Newsletter? Yes, Enter Email:</label>' +
         '    <input class="wide-control" placeholder="first-last@uiowa.edu" rows="2" wrap="soft" type="text" id="email">' +
          ' </form>' +
-          '  </div>';
+          '  </div>',
+        emailHTML = '<form id="askEmail">'+
+           '<label class="narrow-control label-top-left">Would you like to revieve CAB\'s biweekly Newsletter? Yes, Enter Email:</label>'+
+           '<input class="wide-control" placeholder="first-last@uiowa.edu" rows="2" wrap="soft" type="text" id="email">'+
+          '</form>',
+        emailQuestions ="\"Would you like to revieve CAB's biweekly Newsletter? Yes: Enter Email\"";
         
             
     
@@ -210,14 +213,14 @@ $(function () {
     for(var i in localStorage) {
         var survey = JSON.parse(localStorage[i]);
         if(survey.title !== undefined) {
-        $("#oldSurveyList").prepend("<li id='"+survey.title+"'><a href='#newSurvey' id='hrefOnly'>" + survey.title + "</a><span class='ui-li-count'>" + survey.numRes + "</span></li>");
+        $("#oldSurveyList").prepend("<li id='"+survey.title+"'><a href='#newSurvey' id='hrefOnly'>" + survey.title + "</a><div class='ui-li-count'>" + survey.numRes + "</div></li>");
         $('#oldSurveyList').listview("refresh");
         }
     }
    
     
     //Click on li in old survey list, goes to new Survey Page on Href=#newSurvvey
-    $('li').on('click', function () {
+    $('#oldSurveyList li').on('click', function () {
         $thisTitle = $(this).attr('id');
         $(".surveyTitle").text($thisTitle);
         var survey = JSON.parse(window.localStorage.getItem($thisTitle));
@@ -225,18 +228,13 @@ $(function () {
     });
     
     
-    
-   //Creates a new survey 
-    $("#newSurveyBut").on('click', function () {
-        $('#newTitle').show();
-        $('#strtBut').hide();
-        $('#runningQuestions').append(defaultHTML);
-        
+//Save the title and creates a new suvey object
+     function saveTitle(questions, html) {     
          //Creates a date in case new title is NULL
         var d = new Date(),
             datetime = "CAB Survey " + (d.getMonth() + 1)  + " " + d.getFullYear() + " " + d.getHours() + " " + d.getMinutes() + " " + d.getSeconds(),
             $surveyTitle = $("#title").text(),
-            surv = new Survey($surveyTitle, defaultQuestions, 0, '', defaultHTML), //Creates survey object
+            surv = new Survey($surveyTitle, questions, 0, '', html), //Creates survey object
             titleList = [];
         $(".surveyTitle").text(datetime);
        for(var i in localStorage) {
@@ -261,11 +259,32 @@ $(function () {
                 //Save survey meta in local storage
                 window.localStorage.setItem(surv.title, JSON.stringify(surv));
                 //Update the survey list UI in OLD SURVEY PAGE
-                $("#oldSurveyList").append("<li id='" + surv.title + "'><a href='#newSurvey' id='hrefOnly'>" + surv.title + "</a><span class='ui-li-count'>" + surv.numRes + "</span></li>");
+                $("#oldSurveyList").append("<li id='" + surv.title + "'><a href='#newSurvey' id='hrefOnly'>" + surv.title + "</a><div class='ui-li-count'>" + surv.numRes + "</div></li>");
                 $('#oldSurveyList').listview("refresh");
             }
         });
+    }
+      
+    
+   //Creates a new survey with default questions
+    $("#newSurveyBut").on('click', function () {
+        $('#newTitle').show();
+        $('#strtBut').hide();
+        $('#runningQuestions').append(defaultHTML);
+        saveTitle(defaultQuestions, defaultHTML);
     });
+    
+      //Creates a new survey 
+    $("#newSurveyButEmail").on('click', function () {
+        $('#newTitle').show();
+        $('#strtBut').hide();
+        $('#runningQuestions').append(emailHTML);
+        saveTitle(emailQuestions, emailHTML);
+    });
+       
+   
+    
+    
     
  
     //Survey Splash Screen
@@ -323,6 +342,12 @@ $(function () {
         return csvData.toString();
     }
     
+    function processSurveyEmail() {
+        var $askEmail = $("#email").val() || " ";
+        $askEmail = $askEmail.replace(',', ' ');
+        $askEmail =  "\"" + $askEmail + "\"";
+        return $askEmail;
+    }
 
     
    //Submit Survey, calls Cordova Read and Write
@@ -335,15 +360,24 @@ $(function () {
             numRes = thisSurvey.numRes,
             surveyResponse = thisSurvey.response;
         
-        var processedData = processSurvey();
-        if (processedData !== '" "," ","",""," "," "," "') { //Do not allow empty survey
-            window.console.log(readSurveyData.indexOf(thisSurveyQuestions));
+        if(thisSurveyQuestions === emailQuestions){
+            var processedData = processSurveyEmail();
             if (surveyResponse.indexOf(thisSurveyQuestions) !== -1) {
-                surveyResponse += "\n" + processedData;
-            } else {
-                surveyResponse += thisSurveyQuestions + "\n" + processedData;
+                    surveyResponse += "\n" + processedData;
+                } else {
+                    surveyResponse += thisSurveyQuestions + "\n" + processedData;
+                }
+            $('#email').val(''); 
+        } else{
+            var processedData = processSurvey();
+            if (processedData !== '" "," ","",""," "," "," "') { //Do not allow empty survey
+                if (surveyResponse.indexOf(thisSurveyQuestions) !== -1) {
+                    surveyResponse += "\n" + processedData;
+                } else {
+                    surveyResponse += thisSurveyQuestions + "\n" + processedData;
+                }
             }
-            
+            resetForms();
         }
         
         writeFile(thisSurvey.title, surveyResponse);
@@ -353,7 +387,7 @@ $(function () {
         thisSurvey.numRes += (1);
         window.localStorage.setItem(thisSurvey.title, JSON.stringify(thisSurvey));
         $('#oldSurveyList').listview("refresh");
-        resetForms();
+        
         activate_subpage("#page_79_6");
      
     });
@@ -366,6 +400,7 @@ $(function () {
             var jqTitle = "#" + thisSurveyTitle;
             $(jqTitle).remove();
             $('#oldSurveyList').listview("refresh");
+            $( "#runningQuestions" ).children().remove();
         }
     });
 

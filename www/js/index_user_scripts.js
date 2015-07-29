@@ -39,6 +39,7 @@
         /* a  #settingsHome */
     $(document).on("click", "#settingsHome", function(evt)
     {
+            $( "#runningQuestions" ).children().remove();
          activate_subpage("#oldSurveyPage"); 
     });
     

@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "appDesigner",
       "projectGuid": "8c694f0b-59fe-4d89-b960-e41ac92bfa1d",
-      "lastModifiedDate": 1437532155026,
+      "lastModifiedDate": 1438058027519,
       "creationDate": 1431911363787
     },
     "XDK-app-designer": "true",
@@ -149,7 +149,7 @@
           "android-targetSdkVersion": "19",
           "android-installLocation": "auto"
         },
-        "isActive_": false,
+        "isActive_": true,
         "appName_": "SurveyApp",
         "appID_": "xdk.intel.blank.ad.template",
         "appAccess_": [
